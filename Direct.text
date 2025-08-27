@@ -5,9 +5,12 @@
 # 可莉
 DOMAIN,kelee.one
 
-# UZ影视
-DOMAIN-SUFFIX,yingshi.tv
-
 # 动漫
 DOMAIN-KEYWORD,aowu
 DOMAIN-KEYWORD,moefun
+
+# 清风云
+DOMAIN-SUFFIX,qingfengyun.icu
+
+# 云推堡
+DOMAIN-KEYWORD,yuntuibao
