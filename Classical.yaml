@@ -151,7 +151,7 @@ proxies:
 proxy-groups:
   - name: 全部节点
     type: select
-    icon: https://raw.githubusercontent.com/shuisangongzi/icon/refs/heads/main/Clash.png
+    icon: https://raw.githubusercontent.com/Esgz/icon/refs/heads/main/Clash.png
     url: http://www.gstatic.com/generate_204
     include-all-providers: true
 
@@ -365,7 +365,7 @@ proxy-groups:
 rule-providers:
   规则修正:
     <<: *text
-    path: './rules/Proxy.text'
+    path: './rules/Direct.text'
     url: https://raw.githubusercontent.com/Esgz/Surge/refs/heads/main/Direct.text
 
   局域网络:
