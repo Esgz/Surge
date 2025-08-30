@@ -92,7 +92,7 @@ proxies:
 
 # 代理策略
 proxy-groups:
-  - name: 全部节点
+  - name: Clash
     type: select
     icon: https://raw.githubusercontent.com/Esgz/icon/refs/heads/main/Clash.png
     url: http://www.gstatic.com/generate_204
