@@ -31,7 +31,7 @@ UrlTest:
     disable-udp: false
     timeout: 2000
     max-failed-times: 3
-    hidden: false
+    hidden: true
     include-all-providers: true
     
 # 锚点 故障转移参数
@@ -45,7 +45,7 @@ FallBack:
     disable-udp: false
     timeout: 2000
     max-failed-times: 3
-    hidden: false
+    hidden: true
     include-all-providers: true
     
 # 锚点 负载均衡参数
@@ -60,7 +60,7 @@ LoadBalance:
     strategy: consistent-hashing
     timeout: 2000
     max-failed-times: 3
-    hidden: false
+    hidden: true
     include-all-providers: true
     
 # 锚点 规则类型参数
@@ -194,5 +194,6 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
 
 
