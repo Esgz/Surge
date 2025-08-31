@@ -17,7 +17,7 @@ proxy-providers:
   Clash:
     <<: *NodeParam
     path: './Sub/Clash.yaml'
-    url: '订阅链接'
+    url: 'https://gist.githubusercontent.com/Esgz/9898cf241ee7c3aecbf4e62af137e61c/raw/Clash'
     
 # 锚点 时延优选参数
 # 每6秒一次惰性健康检查，容差20ms，时延超2秒判定为失败，失败3次触发健康检查
@@ -194,4 +194,5 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
 
