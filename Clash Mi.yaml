@@ -164,23 +164,23 @@ proxy-groups:
 rule-providers:
   规则修正:
     <<: *text
-    url: https://raw.githubusercontent.com/Esgz/Surge/refs/heads/main/Direct.text
     path: './rules/Direct.text'
+    url: https://raw.githubusercontent.com/Esgz/Surge/refs/heads/main/Direct.text
 
   电报服务:
     <<: *classica
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/TelegramUS/TelegramUS.yaml
     path: './rules/Telegram.yaml'
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/TelegramUS/TelegramUS.yaml
 
   全球服务:
     <<: *classical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global_Classical.yaml
     path: './rules/Global.yaml'
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global_Classical.yaml
 
   大陆服务:
     <<: *classical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml
     path: './rules/ChinaMax.yaml'
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml
 
 # 规则指向
 rules:
