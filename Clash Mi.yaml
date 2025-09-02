@@ -15,10 +15,12 @@ external-ui-url: "https://github.com/Zephyruso/zashboard/releases/latest/downloa
 find-process-mode: strict
 global-client-fingerprint: chrome
 
+# 缓存设置
 profile:
   store-selected: true
   store-fake-ip: true
 
+# 嗅探设置
 sniffer:
   enable: true
   sniff:
@@ -33,6 +35,7 @@ sniffer:
     - "Mijia Cloud"
     - "+.push.apple.com"
 
+# TUN设置
 tun:
   enable: true
   stack: mixed
@@ -43,6 +46,7 @@ tun:
   auto-redirect: true
   auto-detect-interface: true
 
+# DNS设置
 dns:
   enable: true
   ipv6: true
@@ -55,7 +59,6 @@ dns:
   default-nameserver:
     - tls://223.5.5.5
     - tls://223.6.6.6
-
   nameserver:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
@@ -91,6 +94,35 @@ UrlTest:
     timeout: 2000
     max-failed-times: 3
     hidden: false
+    include-all-providers: true
+    
+# 锚点 故障转移参数
+# 每6秒一次惰性健康检查，时延超2秒判定为失败，失败3次触发健康检查
+FallBack:
+  &FallBack
+    type: fallback
+    interval: 6
+    lazy: true
+    url: http://www.gstatic.com/generate_204
+    disable-udp: false
+    timeout: 2000
+    max-failed-times: 3
+    hidden: true
+    include-all-providers: true
+    
+# 锚点 负载均衡参数
+# 每6秒一次惰性健康检查，时延超2秒判定为失败，失败3次触发健康检查
+LoadBalance:
+  &LoadBalance
+    type: load-balance
+    interval: 6
+    lazy: true
+    url: http://www.gstatic.com/generate_204
+    disable-udp: false
+    strategy: consistent-hashing
+    timeout: 2000
+    max-failed-times: 3
+    hidden: true
     include-all-providers: true
     
 # 锚点 规则类型
@@ -213,4 +245,5 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
 
