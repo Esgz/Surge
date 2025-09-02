@@ -136,28 +136,28 @@ proxy-groups:
 
 # 节点策略
   - name: 香港节点
-    <<: *UrlTest
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/HK.png
+    <<: *UrlTest
     filter: 香港|港|HK|🇭🇰
 
   - name: 台湾节点
-    <<: *UrlTest
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/TW.png
+    <<: *UrlTest
     filter: 台湾|台|TW|🇹🇼
 
   - name: 日本节点
-    <<: *UrlTest
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/JP.png
+    <<: *UrlTest
     filter: 日本|JP|🇯🇵
 
   - name: 新国节点
-    <<: *UrlTest
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/SG.png
+    <<: *UrlTest
     filter: 新加坡|狮|SG|🇸🇬
 
   - name: 美国节点
-    <<: *UrlTest
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/US.png
+    <<: *UrlTest
     filter: 美国|美|US|🇺🇸
     
 # 订阅规则
@@ -189,6 +189,7 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
 
 
 
