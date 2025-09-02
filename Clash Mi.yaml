@@ -63,25 +63,19 @@ proxies:
 
 # 代理策略
 proxy-groups:
-  - name: Clash
-    type: select
-    icon: https://raw.githubusercontent.com/Esgz/icon/refs/heads/main/Clash.png
-    url: http://www.gstatic.com/generate_204
-    include-all-providers: true
-
-  - name: 漏网之鱼
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Catnet.png
-    proxies:
-      - 全球服务
-      - 直接连接
-
   - name: 规则修正
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bypass.png
     proxies:
       - 直接连接
       - 全球服务
+      
+  - name: 漏网之鱼
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Catnet.png
+    proxies:
+      - 全球服务
+      - 直接连接
 
   - name: 电报服务
     type: select
@@ -160,6 +154,7 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
 
 
 
