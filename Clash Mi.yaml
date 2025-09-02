@@ -34,7 +34,7 @@ sniffer:
   skip-domain:
     - "Mijia Cloud"
     - "+.push.apple.com"
-
+    
 # TUN设置
 tun:
   enable: true
@@ -96,7 +96,7 @@ UrlTest:
     hidden: false
     include-all-providers: true
     
-# 锚点 故障转移参数
+# 锚点 故障转移
 # 每6秒一次惰性健康检查，时延超2秒判定为失败，失败3次触发健康检查
 FallBack:
   &FallBack
@@ -109,8 +109,8 @@ FallBack:
     max-failed-times: 3
     hidden: true
     include-all-providers: true
-    
-# 锚点 负载均衡参数
+
+# 锚点 负载均衡
 # 每6秒一次惰性健康检查，时延超2秒判定为失败，失败3次触发健康检查
 LoadBalance:
   &LoadBalance
@@ -124,7 +124,7 @@ LoadBalance:
     max-failed-times: 3
     hidden: true
     include-all-providers: true
-    
+
 # 锚点 规则类型
 # 每24小时更新一次
 # 经典匹配
@@ -245,6 +245,7 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
 
 
 
