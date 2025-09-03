@@ -134,7 +134,7 @@ rule-providers:
   电报服务:
     <<: *classical
     path: './rules/Telegram.yaml'
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/TelegramUS/TelegramUS.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.yaml
 
   全球服务:
     <<: *classical
@@ -153,3 +153,4 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
