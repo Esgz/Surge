@@ -8,8 +8,8 @@ allow-lan: true
 unified-delay: false
 tcp-concurrent: true
 external-controller: 127.0.0.1:9090
-external-ui: ui
-external-ui-url: "https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip"
+#external-ui: ui
+#external-ui-url: "https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip"
 
 find-process-mode: strict
 global-client-fingerprint: chrome
@@ -214,4 +214,5 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
 
