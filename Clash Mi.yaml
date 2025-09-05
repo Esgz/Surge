@@ -123,7 +123,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/US.png
     <<: *UrlTest
     filter: 美国|美|US|🇺🇸
-    
+
 # 订阅规则
 rule-providers:
   规则修正:
@@ -153,4 +153,5 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
 
