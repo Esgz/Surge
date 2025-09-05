@@ -68,7 +68,7 @@ proxy-groups:
     proxies:
       - 直接连接
       - 全球服务
-      
+
   - name: 漏网之鱼
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Catnet.png
@@ -153,3 +153,4 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
