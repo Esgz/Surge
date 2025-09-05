@@ -2,7 +2,7 @@
 # 适用范围 Mihomo 内核
 
 # 基本配置
-mixed-port: 7890
+#mixed-port: 7890
 ipv6: true
 allow-lan: true
 unified-delay: false
@@ -214,5 +214,6 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
 
 
