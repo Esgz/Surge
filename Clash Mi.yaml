@@ -130,20 +130,6 @@ proxy-groups:
       - 全球服务
       - 直接连接
 
-  - name: 海外媒体
-    type: select
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/bahamute.png
-    proxies:
-      - 美国节点
-      - 全球服务
-
-  - name: 谷歌服务
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
-    proxies:
-      - 美国节点
-      - 全球服务
-
   - name: 电报服务
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
@@ -198,14 +184,6 @@ rule-providers:
     <<: *text
     url: https://raw.githubusercontent.com/Esgz/Surge/refs/heads/main/Direct.text
 
-  海外媒体:
-    <<: *classical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml
-
-  谷歌服务:
-    <<: *classical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google.yaml
-
   电报服务:
     <<: *classical
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.yaml
@@ -221,8 +199,6 @@ rule-providers:
 # 规则指向
 rules:
   - RULE-SET,规则修正,规则修正
-  - RULE-SET,海外媒体,海外媒体
-  - RULE-SET,谷歌服务,谷歌服务
   - RULE-SET,电报服务,电报服务
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
