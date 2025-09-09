@@ -198,8 +198,17 @@ rule-providers:
 
 # 规则指向
 rules:
+  - DOMAIN-SUFFIX,*.adobe.io,REJECT
+  - DOMAIN-SUFFIX,*.adobestats.io,REJECT
+  - DOMAIN-SUFFIX, adobestats.io, REJECT
+  - DOMAIN-SUFFIX, adobe.io,REJECT
+  - DOMAIN-SUFFIX,adobe.com,DIRECT
+  - DOMAIN-SUFFIX,adobelogin.com,DIRECT
+  - DOMAIN-SUFFIX,adobesc.com,DIRECT
+  - DOMAIN-SUFFIX,adobe.io,DIRECT
   - RULE-SET,规则修正,规则修正
   - RULE-SET,电报服务,电报服务
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
