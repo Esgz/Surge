@@ -200,8 +200,8 @@ rule-providers:
 rules:
   - DOMAIN-SUFFIX,*.adobe.io,REJECT
   - DOMAIN-SUFFIX,*.adobestats.io,REJECT
-  - DOMAIN-SUFFIX, adobestats.io, REJECT
-  - DOMAIN-SUFFIX, adobe.io,REJECT
+  - DOMAIN-SUFFIX,adobestats.io, REJECT
+  - DOMAIN-SUFFIX,adobe.io,REJECT
   - DOMAIN-SUFFIX,adobe.com,DIRECT
   - DOMAIN-SUFFIX,adobelogin.com,DIRECT
   - DOMAIN-SUFFIX,adobesc.com,DIRECT
@@ -211,4 +211,5 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
 
