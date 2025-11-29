@@ -91,7 +91,7 @@ UrlTest:
     disable-udp: false
     timeout: 2000
     max-failed-times: 3
-    hidden: true
+    hidden: false
     include-all-providers: true
 
 # 锚点 规则类型，每24小时更新一次
@@ -211,5 +211,3 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
-
-
