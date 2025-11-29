@@ -162,7 +162,7 @@ proxy-groups:
   - name: 香港节点
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/HK.png
     <<: *UrlTest
-    filter: 香港|港|HK|🇭🇰
+    filter: ^(?i)(?=.*(香港|🇭🇰))(?!.*直连)(?!.*5x).*$
 
   - name: 台湾节点
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/TW.png
@@ -211,4 +211,5 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
 
