@@ -78,7 +78,7 @@ NodeParam:
 proxy-providers:
   Clash:
     <<: *NodeParam
-    url: 'https://gist.githubusercontent.com/Esgz/245b5d40d8510f0ca813e1a09d68726e/raw/Clash'
+    url: '订阅链接'
 
 # 锚点 时延优选
 UrlTest:
@@ -211,3 +211,4 @@ rules:
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
+
