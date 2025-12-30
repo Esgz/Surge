@@ -68,11 +68,11 @@ dns:
 NodeParam:
   &NodeParam
     type: http
-    interval: 86400
+    interval: 3600
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
-      interval: 600
+      interval: 60
 
 # 节点订阅
 proxy-providers:
@@ -162,7 +162,7 @@ proxy-groups:
   - name: 香港节点
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/HK.png
     <<: *UrlTest
-    filter: ^(?i)(?=.*(香港|🇭🇰))(?!.*直连)(?!.*5x).*$
+    filter: ^(?=.*(🇭🇰|香港))(?!.*(直连|5x))
 
   - name: 台湾节点
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/TW.png
@@ -204,11 +204,8 @@ rule-providers:
 
 # 规则指向
 rules:
-  - DOMAIN-SUFFIX,adobestats.io,REJECT
-  - DOMAIN-SUFFIX,adobe.io,REJECT
   - RULE-SET,规则修正,规则修正
   - RULE-SET,电报服务,电报服务
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
-
