@@ -203,9 +203,9 @@ proxies:
 
 # 策略组
 proxy-groups:
-  - name: Mihomo
+  - name: Clash
     type: select
-    icon: 'https://raw.githubusercontent.com/Esgz/icon/refs/heads/main/Mihomo.png'
+    icon: 'https://raw.githubusercontent.com/Esgz/icon/refs/heads/main/Clash.png'
     include-all-providers: true
 
   - name: 漏网之鱼
