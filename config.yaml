@@ -66,7 +66,7 @@ sniffer:
 
 # TUN 配置
 tun:
-  enable: false
+  enable: true
   stack: gvisor # gvisor/mixed/system
   dns-hijack:
     - any:53
@@ -203,9 +203,9 @@ proxies:
 
 # 策略组
 proxy-groups:
-  - name: Clash
+  - name: Mihomo
     type: select
-    icon: 'https://raw.githubusercontent.com/Esgz/icon/refs/heads/main/Clash.png'
+    icon: 'https://raw.githubusercontent.com/Esgz/icon/refs/heads/main/Mihomo.png'
     include-all-providers: true
 
   - name: 漏网之鱼
