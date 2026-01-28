@@ -60,11 +60,13 @@ tun:
 # DNS
 dns:
   enable: true
-  prefer-h3: true
+  prefer-h3: false
   listen: 127.0.0.1:1053
   ipv6: true
 
-  enhanced-mode: fake-ip #fake-ip/redir-host
+  # fake-ip↔redir-host
+  enhanced-mode: fake-ip
+
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - '*.lan'
@@ -114,8 +116,8 @@ proxies:
 # 锚点 时延优选
 UrlTest: &UrlTest
   type: url-test
-  interval: 180
-  tolerance: 50
+  interval: 1800
+  tolerance: 100
   lazy: true
   url: 'https://www.gstatic.com/generate_204'
   disable-udp: false
