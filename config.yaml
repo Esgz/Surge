@@ -47,7 +47,7 @@ sniffer:
 # TUN
 tun:
   enable: true
-  stack: mixed # system/mixed/gvisor
+  stack: system # system/mixed/gvisor
   auto-detect-interface: true
   mtu: 0
   auto-route: true
@@ -146,13 +146,13 @@ US: &US
 
 # 策略组
 proxy-groups:
-  - name: 订阅-壹
+  - name: Clash
     type: select
     icon: 'https://raw.githubusercontent.com/Esgz/icon/refs/heads/main/Clash.png'
     use:
       - One
 
-  - name: 订阅-贰
+  - name: Mihomo
     type: select
     icon: 'https://raw.githubusercontent.com/Esgz/icon/refs/heads/main/Meta.png'
     use:
