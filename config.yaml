@@ -1,6 +1,6 @@
 # Mihomo 配置
 # 名称：config.yaml
-# 版本：2026-01-28
+# 版本：2026-01-29
 # 适用: Windows / Android
 
 # 端口
@@ -46,7 +46,7 @@ sniffer:
 
 # TUN
 tun:
-  enable: true
+  enable: false
   stack: system # system/mixed/gvisor
   auto-detect-interface: true
   mtu: 0
@@ -60,7 +60,7 @@ tun:
 # DNS
 dns:
   enable: true
-  prefer-h3: false
+  prefer-h3: true
   listen: 127.0.0.1:1053
   ipv6: true
 
