@@ -1,6 +1,6 @@
 # Mihomo 配置
 # 名称：config.yaml
-# 版本：2026-01-29
+# 版本：2026-01-31
 # 适用: Windows / Android
 
 # 端口
@@ -19,8 +19,8 @@ allow-lan: true
 unified-delay: true
 
 # 面板
-external-controller: 127.0.0.1:9090
-external-ui: zashboard
+external-controller: 0.0.0.0:9090
+external-ui: webui
 external-ui-url: 'https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip'
 
 # 缓存
@@ -34,7 +34,6 @@ sniffer:
   force-dns-mapping: true
   parse-pure-ip: true
   override-destination: true
-
   sniff:
     HTTP:
       ports: [80, 8080-8880]
@@ -46,13 +45,12 @@ sniffer:
 
 # TUN
 tun:
-  enable: false
-  stack: system # system/mixed/gvisor
+  enable: true
+  stack: system
   auto-detect-interface: true
   mtu: 0
   auto-route: true
   auto-redirect: true
-
   dns-hijack:
     - udp://any:53
     - tcp://any:53
@@ -61,25 +59,12 @@ tun:
 dns:
   enable: true
   prefer-h3: true
-  listen: 127.0.0.1:1053
+  listen: 0.0.0.0:1053
   ipv6: true
-
-  # fake-ip↔redir-host
-  enhanced-mode: fake-ip
-
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter:
-    - '*.lan'
-    - '*.local'
-    - 'localhost'
-    - '*.arpa'
-    - 'time.*'
-    - 'ntp.*'
-
+  enhanced-mode: redir-host
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
-
   nameserver:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
@@ -91,7 +76,7 @@ NodeParam: &NodeParam
   health-check:
     enable: true
     url: 'https://www.gstatic.com/generate_204'
-    interval: 180
+    interval: 600
 
 # 节点订阅
 proxy-providers:
@@ -205,12 +190,6 @@ proxy-groups:
       - 美国-贰
       - 香港-壹
       - 香港-贰
-      - 台湾-壹
-      - 台湾-贰
-      - 日本-壹
-      - 日本-贰
-      - 新国-壹
-      - 新国-贰
 
   - name: 微软服务
     type: select
@@ -218,6 +197,14 @@ proxy-groups:
     proxies:
       - 全球服务
       - 直接连接
+      - 台湾-壹
+      - 台湾-贰
+      - 日本-壹
+      - 日本-贰
+      - 新国-壹
+      - 新国-贰
+      - 美国-壹
+      - 美国-贰
 
   - name: 全球服务
     type: select
@@ -309,25 +296,25 @@ rule-providers:
     url: 'https://raw.githubusercontent.com/privacy-protection-tools/anti-ad.github.io/master/docs/mihomo.mrs'
     path: './RuleSet/mihomo.mrs'
 
+  微软服务:
+    <<: *list
+    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.list'
+    path: './RuleSet/Microsoft.list'
+
   电报服务:
     <<: *list
     url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.list'
     path: './RuleSet/Telegram.list'
-
-  谷歌服务:
-    <<: *list
-    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google.list'
-    path: './RuleSet/Google.list'
 
   媒体服务:
     <<: *list
     url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GlobalMedia/GlobalMedia.list'
     path: './RuleSet/GlobalMedia.list'
 
-  微软服务:
+  谷歌服务:
     <<: *list
-    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.list'
-    path: './RuleSet/Microsoft.list'
+    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google.list'
+    path: './RuleSet/Google.list'
 
   全球服务:
     <<: *list
@@ -343,10 +330,10 @@ rules:
   - RULE-SET,局域网络,直接连接
   - RULE-SET,规则修正,规则修正
   - RULE-SET,广告拦截,广告拦截
+  - RULE-SET,微软服务,微软服务
   - RULE-SET,电报服务,电报服务
   - RULE-SET,媒体服务,媒体服务
   - RULE-SET,谷歌服务,谷歌服务
-  - RULE-SET,微软服务,微软服务
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
