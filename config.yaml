@@ -1,0 +1,298 @@
+# Mihomo 配置
+# 名称：config.yaml
+# 版本：2026-02-10
+# 适用: Windows / Android
+
+# 端口
+port: 7890
+socks-port: 7891
+mixed-port: 7892
+redir-port: 9797
+tproxy-port: 9898
+
+# 通用
+ipv6: true
+mode: rule
+log-level: info
+find-process-mode: strict
+allow-lan: true
+unified-delay: true
+
+# 面板
+external-controller: 0.0.0.0:9090
+external-ui: webui
+external-ui-url: 'https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip'
+
+# 缓存
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+# 嗅探
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+
+# TUN
+tun:
+  enable: true
+  stack: system
+  auto-detect-interface: true
+  mtu: 0
+  auto-route: true
+  auto-redirect: true
+  dns-hijack:
+    - udp://any:53
+    - tcp://any:53
+
+# DNS
+dns:
+  enable: true
+  prefer-h3: true
+  listen: 0.0.0.0:1053
+  ipv6: true
+  enhanced-mode: redir-host
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+
+# 订阅参数
+proxy-providers:
+  Clash:
+    type: http
+    url: '订阅'
+    interval: 21600
+    health-check:
+      enable: true
+      url: 'https://www.gstatic.com/generate_204'
+      interval: 3600
+    path: './proxy_provider/Clash.yaml'
+
+# 锚点 时延优选
+UrlTest: &UrlTest
+  type: url-test
+  interval: 1800
+  tolerance: 100
+  lazy: true
+  url: 'https://www.gstatic.com/generate_204'
+  disable-udp: false
+  timeout: 2000
+  max-failed-times: 3
+
+# 本地策略
+proxies:
+  - name: 直接连接
+    type: direct
+
+  - name: 拒绝连接
+    type: reject
+
+# 策略组
+proxy-groups:
+  - name: 漏网之鱼
+    type: select
+    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Catnet.png'
+    proxies:
+      - 全球服务
+      - 直接连接
+
+  - name: 广告拦截
+    type: select
+    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Reject.png'
+    proxies:
+      - 拒绝连接
+      - 直接连接
+
+  - name: 规则修正
+    type: select
+    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bypass.png'
+    proxies:
+      - 直接连接
+      - 全球服务
+
+  - name: 电报服务
+    type: select
+    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png'
+    proxies:
+      - 全球服务
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 新国节点
+      - 美国节点
+
+  - name: 谷歌服务
+    type: select
+    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png'
+    proxies:
+      - 美国节点
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 新国节点
+      - 自选节点
+
+  - name: 媒体服务
+    type: select
+    icon: 'https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/03CNSoft/senplayer.png'
+    proxies:
+      - 美国节点
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 新国节点
+      - 自选节点
+
+  - name: 微软服务
+    type: select
+    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png'
+    proxies:
+      - 全球服务
+      - 直接连接
+      - 台湾节点
+      - 日本节点
+      - 新国节点
+      - 美国节点
+
+  - name: 全球服务
+    type: select
+    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png'
+    proxies:
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 新国节点
+      - 美国节点
+      - 自选节点
+
+# 节点筛选
+  - name: 自选节点
+    type: select
+    filter: '^(?!.*免费).*'
+    icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/UN.png'
+    include-all-providers: true
+
+  - name: 香港节点
+    <<: *UrlTest
+    filter: '^(?=.*(🇭🇰|香港))(?!.*(直连|Y01|x0.8|5x))'
+    icon: 'https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/HK.png'
+    include-all-providers: true
+
+  - name: 台湾节点
+    <<: *UrlTest
+    filter: '^(?=.*(🇹🇼|台湾))(?!.*(直连|5x))'
+    icon: 'https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/TW.png'
+    include-all-providers: true
+
+  - name: 日本节点
+    <<: *UrlTest
+    filter: '^(?=.*(🇯🇵|日本))(?!.*(直连|免费|下载))'
+    icon: 'https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/JP.png'
+    include-all-providers: true
+
+  - name: 新国节点
+    <<: *UrlTest
+    filter: '^(?=.*(🇸🇬|新加坡))(?!.*(直连|5x))'
+    icon: 'https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/SG.png'
+    include-all-providers: true
+
+  - name: 美国节点
+    <<: *UrlTest
+    filter: '^(?=.*(🇺🇸|美国))(?!.*(直连|5x))'
+    icon: 'https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/US.png'
+    include-all-providers: true
+
+# 锚点 规则类型
+RuleBase: &RuleBase
+  type: http
+  interval: 86400
+  update-strategy: incremental
+  timeout: 5000
+
+list: &list
+  <<: *RuleBase
+  behavior: classical
+  format: text
+
+domain: &domain
+  <<: *RuleBase
+  behavior: domain
+  format: mrs
+
+# 远程规则
+rule-providers:
+  局域网络:
+    <<: *list
+    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Lan/Lan.list'
+    path: './RuleSet/Lan.list'
+
+  规则修正:
+    <<: *list
+    url: 'https://raw.githubusercontent.com/Esgz/Surge/refs/heads/main/Direct.list'
+    path: './RuleSet/Direct.list'
+
+  域名拦截:
+    <<: *list
+    url: 'https://raw.githubusercontent.com/Esgz/Surge/refs/heads/main/Reject.list'
+    path: './RuleSet/Reject.list'
+
+  广告拦截:
+    <<: *domain
+    url: 'https://raw.githubusercontent.com/privacy-protection-tools/anti-ad.github.io/master/docs/mihomo.mrs'
+    path: './RuleSet/mihomo.mrs'
+
+  微软服务:
+    <<: *list
+    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.list'
+    path: './RuleSet/Microsoft.list'
+
+  电报服务:
+    <<: *list
+    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.list'
+    path: './RuleSet/Telegram.list'
+
+  媒体服务:
+    <<: *list
+    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GlobalMedia/GlobalMedia.list'
+    path: './RuleSet/GlobalMedia.list'
+
+  谷歌服务:
+    <<: *list
+    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google.list'
+    path: './RuleSet/Google.list'
+
+  全球服务:
+    <<: *list
+    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.list'
+    path: './RuleSet/Global.list'
+
+  大陆服务:
+    <<: *list
+    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/ChinaMax/ChinaMax.list'
+    path: './RuleSet/ChinaMax.list'
+
+rules:
+  - RULE-SET,局域网络,直接连接
+  - RULE-SET,规则修正,规则修正
+  - RULE-SET,域名拦截,拒绝连接
+  - RULE-SET,广告拦截,广告拦截
+  - RULE-SET,微软服务,微软服务
+  - RULE-SET,电报服务,电报服务
+  - RULE-SET,媒体服务,媒体服务
+  - RULE-SET,谷歌服务,谷歌服务
+  - RULE-SET,全球服务,全球服务
+  - RULE-SET,大陆服务,直接连接
+  - MATCH,漏网之鱼
