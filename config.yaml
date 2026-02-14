@@ -1,6 +1,6 @@
 # Mihomo 配置
 # 名称：config.yaml
-# 版本：2026-02-10
+# 版本：2026-02-15
 # 适用: Windows / Android
 
 # 端口
@@ -78,14 +78,14 @@ proxy-providers:
     health-check:
       enable: true
       url: 'https://www.gstatic.com/generate_204'
-      interval: 3600
+      interval: 1800
     path: './proxy_provider/Clash.yaml'
 
 # 锚点 时延优选
 UrlTest: &UrlTest
   type: url-test
-  interval: 1800
-  tolerance: 100
+  interval: 600
+  tolerance: 50
   lazy: true
   url: 'https://www.gstatic.com/generate_204'
   disable-udp: false
@@ -128,44 +128,34 @@ proxy-groups:
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png'
     proxies:
       - 全球服务
-      - 香港节点
-      - 台湾节点
-      - 日本节点
-      - 新国节点
-      - 美国节点
+      - 自选节点
 
   - name: 谷歌服务
     type: select
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png'
     proxies:
+      - 新国节点
       - 美国节点
       - 香港节点
-      - 台湾节点
-      - 日本节点
-      - 新国节点
       - 自选节点
 
   - name: 媒体服务
     type: select
     icon: 'https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/03CNSoft/senplayer.png'
     proxies:
+      - 新国节点
       - 美国节点
       - 香港节点
-      - 台湾节点
-      - 日本节点
-      - 新国节点
       - 自选节点
 
   - name: 微软服务
     type: select
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png'
     proxies:
-      - 全球服务
-      - 直接连接
-      - 台湾节点
-      - 日本节点
       - 新国节点
       - 美国节点
+      - 香港节点
+      - 直接连接
 
   - name: 全球服务
     type: select
