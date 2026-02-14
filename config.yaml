@@ -127,7 +127,9 @@ proxy-groups:
     type: select
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png'
     proxies:
-      - 全球服务
+      - 新国节点
+      - 美国节点
+      - 香港节点
       - 自选节点
 
   - name: 谷歌服务
