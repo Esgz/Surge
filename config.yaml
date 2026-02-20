@@ -1,6 +1,6 @@
 # Mihomo 配置
 # 名称：config.yaml
-# 版本：2026-02-15
+# 版本：2026-02-21
 # 适用: Windows / Android
 
 # 端口
@@ -19,7 +19,7 @@ allow-lan: true
 unified-delay: true
 
 # 面板
-external-controller: 0.0.0.0:9090
+external-controller: 127.0.0.1:9090
 external-ui: webui
 external-ui-url: 'https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip'
 
@@ -59,7 +59,7 @@ tun:
 dns:
   enable: true
   prefer-h3: true
-  listen: 0.0.0.0:1053
+  listen: 127.0.0.1:1053
   ipv6: true
   enhanced-mode: redir-host
   default-nameserver:
@@ -73,8 +73,8 @@ dns:
 proxy-providers:
   Clash:
     type: http
-    url: '订阅'
-    interval: 21600
+    url: '订阅链接'
+    interval: 10800
     health-check:
       enable: true
       url: 'https://www.gstatic.com/generate_204'
@@ -91,6 +91,7 @@ UrlTest: &UrlTest
   disable-udp: false
   timeout: 2000
   max-failed-times: 3
+  include-all-providers: true
 
 # 本地策略
 proxies:
@@ -102,6 +103,11 @@ proxies:
 
 # 策略组
 proxy-groups:
+  - name: Clash
+    type: select
+    icon: 'https://raw.githubusercontent.com/Esgz/icon/refs/heads/main/Clash.png'
+    include-all-providers: true
+
   - name: 漏网之鱼
     type: select
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Catnet.png'
@@ -109,54 +115,29 @@ proxy-groups:
       - 全球服务
       - 直接连接
 
-  - name: 广告拦截
-    type: select
-    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Reject.png'
-    proxies:
-      - 拒绝连接
-      - 直接连接
-
-  - name: 规则修正
-    type: select
-    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bypass.png'
-    proxies:
-      - 直接连接
-      - 全球服务
-
   - name: 电报服务
     type: select
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png'
     proxies:
-      - 新国节点
-      - 美国节点
+      - 全球服务
       - 香港节点
-      - 自选节点
+      - 台湾节点
+      - 新国节点
 
   - name: 谷歌服务
     type: select
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png'
     proxies:
       - 新国节点
-      - 美国节点
       - 香港节点
-      - 自选节点
-
-  - name: 媒体服务
-    type: select
-    icon: 'https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/03CNSoft/senplayer.png'
-    proxies:
-      - 新国节点
       - 美国节点
-      - 香港节点
-      - 自选节点
+      - 全球服务
 
   - name: 微软服务
     type: select
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png'
     proxies:
-      - 新国节点
-      - 美国节点
-      - 香港节点
+      - 全球服务
       - 直接连接
 
   - name: 全球服务
@@ -166,63 +147,49 @@ proxy-groups:
       - 香港节点
       - 台湾节点
       - 日本节点
+      - 韩国节点
       - 新国节点
       - 美国节点
-      - 自选节点
 
 # 节点筛选
-  - name: 自选节点
-    type: select
-    filter: '^(?!.*免费).*'
-    icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/UN.png'
-    include-all-providers: true
-
   - name: 香港节点
     <<: *UrlTest
-    filter: '^(?=.*(🇭🇰|香港))(?!.*(直连|Y01|x0.8|5x))'
+    filter: '🇭🇰|香港'
     icon: 'https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/HK.png'
-    include-all-providers: true
 
   - name: 台湾节点
     <<: *UrlTest
-    filter: '^(?=.*(🇹🇼|台湾))(?!.*(直连|5x))'
+    filter: '🇹🇼|台湾'
     icon: 'https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/TW.png'
-    include-all-providers: true
 
   - name: 日本节点
     <<: *UrlTest
-    filter: '^(?=.*(🇯🇵|日本))(?!.*(直连|免费|下载))'
+    filter: '🇯🇵|日本'
     icon: 'https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/JP.png'
-    include-all-providers: true
+
+  - name: 韩国节点
+    <<: *UrlTest
+    filter: '🇰🇷|韩国'
+    icon: 'https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/KR.png'
 
   - name: 新国节点
     <<: *UrlTest
-    filter: '^(?=.*(🇸🇬|新加坡))(?!.*(直连|5x))'
+    filter: '🇸🇬|新加坡'
     icon: 'https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/SG.png'
-    include-all-providers: true
 
   - name: 美国节点
     <<: *UrlTest
-    filter: '^(?=.*(🇺🇸|美国))(?!.*(直连|5x))'
+    filter: '🇺🇸|美国'
     icon: 'https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/US.png'
-    include-all-providers: true
 
 # 锚点 规则类型
-RuleBase: &RuleBase
+list: &list
   type: http
   interval: 86400
   update-strategy: incremental
   timeout: 5000
-
-list: &list
-  <<: *RuleBase
   behavior: classical
   format: text
-
-domain: &domain
-  <<: *RuleBase
-  behavior: domain
-  format: mrs
 
 # 远程规则
 rule-providers:
@@ -231,30 +198,20 @@ rule-providers:
     url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Lan/Lan.list'
     path: './RuleSet/Lan.list'
 
-  规则修正:
-    <<: *list
-    url: 'https://raw.githubusercontent.com/Esgz/Surge/refs/heads/main/Direct.list'
-    path: './RuleSet/Direct.list'
-
   域名拦截:
     <<: *list
     url: 'https://raw.githubusercontent.com/Esgz/Surge/refs/heads/main/Reject.list'
     path: './RuleSet/Reject.list'
 
-  广告拦截:
-    <<: *domain
-    url: 'https://raw.githubusercontent.com/privacy-protection-tools/anti-ad.github.io/master/docs/mihomo.mrs'
-    path: './RuleSet/mihomo.mrs'
+  电报服务:
+    <<: *list
+    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.list'
+    path: './RuleSet/Telegram.list'
 
   微软服务:
     <<: *list
     url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.list'
     path: './RuleSet/Microsoft.list'
-
-  电报服务:
-    <<: *list
-    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.list'
-    path: './RuleSet/Telegram.list'
 
   媒体服务:
     <<: *list
@@ -278,12 +235,10 @@ rule-providers:
 
 rules:
   - RULE-SET,局域网络,直接连接
-  - RULE-SET,规则修正,规则修正
   - RULE-SET,域名拦截,拒绝连接
-  - RULE-SET,广告拦截,广告拦截
+  - RULE-SET,电报服务,电报服务  
   - RULE-SET,微软服务,微软服务
-  - RULE-SET,电报服务,电报服务
-  - RULE-SET,媒体服务,媒体服务
+  - RULE-SET,媒体服务,谷歌服务
   - RULE-SET,谷歌服务,谷歌服务
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
