@@ -1,0 +1,57 @@
+#!name=module
+#!desc=本地-自定义\n分流,重写,脚本,MITM
+#!category=🏠 Local
+
+[Rule]
+# 农业银行防代理检测
+DOMAIN,msmp.abchina.com.cn,REJECT
+
+# NB助手 去广告
+DOMAIN,unet.quark.cn,REJECT
+DOMAIN,v66-ad.ndcjl.com,REJECT
+DOMAIN,open.e.kuaishou.cn,REJECT
+DOMAIN,open.e.kuaishou.com,REJECT
+DOMAIN,api-dsp.8ziben.com,REJECT
+DOMAIN,sdk.zhangyuyidong.cn,REJECT
+DOMAIN,api-events.8ziben.com,REJECT
+DOMAIN-SUFFIX,yximgs.com,REJECT
+DOMAIN-SUFFIX,adkwai.com,REJECT
+
+[Map Local]
+# 哔哩搜索词
+^https://app.bilibili.com/x/v2/search/defaultwords data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+# 哔哩开屏广告
+#^https://app.bilibili.com/x/v2/splash/show data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[URL Rewrite]
+# 爱思助手
+^https?:\/\/list-app-m\.i4\.cn\/(adclickcb|getopfstadinfo)\.xhtml url reject
+
+# 腾讯微云
+^https?:\/\/us\.l\.qq\.com\/exapp\?adposcount=\d - reject
+
+# 哔哩搜索词
+^https?:\/\/(app\.bilibili\.com|grpc\.biliapi\.net)\/bilibili\.app\.interface\.v1\.Search\/Default - reject
+
+[Script]
+# 哔哩热搜词@Moli-X
+bilibili_json = type=http-response, pattern=^https://app.bilibili.com/x/v2/search/square, script-path=https://raw.githubusercontent.com/Moli-X/Resources/main/Script/Bilibili/bilibili_json.js, requires-body=true, max-size=-1, timeout=60
+
+# 繁体CC字幕转中文简体
+ZMBilibili = type=http-response, pattern=^https?:\/\/i.\.hdslb\.com\/bfs\/subtitle\/.+\.json$, script-path=https://raw.githubusercontent.com/Moli-X/Resources/main/Script/Bilibili/ZMBilibili.js, requires-body=true, max-size=-1, timeout=60
+
+# 去除统一设置的皮肤
+bilibili_json = type=http-response, pattern=^https?:\/\/app\.bilibili\.com\/x\/resource\/show\/skin\?, script-path=https://raw.githubusercontent.com/Moli-X/Resources/main/Script/Bilibili/bilibili_json.js, requires-body=true, max-size=-1, timeout=60
+
+# 哔哩哔哩_开屏广告列表
+#bilibili_json = type=http-response, pattern=^https:\/\/app\.bilibili\.com\/x\/v2\/splash\/list, script-path=https://raw.githubusercontent.com/Moli-X/Resources/main/Script/Bilibili/bilibili_json.js, requires-body=true, max-size=-1, timeout=60
+
+# 1080P高码率+4K画质[番剧和影视除外]
+#bilibili_json = type=http-response, pattern=^https?:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo\?, script-path=https://raw.githubusercontent.com/Moli-X/Resources/main/Script/Bilibili/bilibili_json.js, requires-body=true, max-size=-1, timeout=60
+
+# 启动时开启直连模式
+#ZLBilibili = type=http-response, pattern=^https?:\/\/app\.bilibili\.com\/x\/resource\/domain, script-path=https://raw.githubusercontent.com/Moli-X/Resources/main/Script/Bilibili/ZLBilibili.js, requires-body=true, max-size=-1, timeout=60
+
+[MITM]
+hostname = %APPEND% list-app-m.i4.cn,us.l.qq.com,i0.hdslb.com,aisubtitle.hdslb.com,app.bilibili.com, grpc.biliapi.net
