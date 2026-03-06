@@ -2,11 +2,11 @@
 # AUTHOR: Esgz
 # By Surge
 
-# 清风云
-DOMAIN-KEYWORD,qingfengyun
-
 # 云推堡
 DOMAIN-KEYWORD,yuntuibao
 
+# 清风云
+DOMAIN-KEYWORD,qingfengyun
+
 # Edge 扩展商店
-DOMAIN,msedgeextensions.sf.tlu.dl.delivery.mp.microsoft.com
+DOMAIN-SUFFIX,dl.delivery.mp.microsoft.com
