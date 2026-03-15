@@ -1,6 +1,6 @@
 # Mihomo 配置
 # 名称：config.yaml
-# 版本：2026-03-05
+# 版本：2026-03-13
 # 适用: Windows / Android
 
 # 端口
@@ -47,7 +47,7 @@ sniffer:
 dns:
   enable: true
   prefer-h3: true
-  listen: "[::]:1053"
+  listen: "127.0.0.1:1053"
   ipv6: true
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
@@ -59,8 +59,8 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
   nameserver:
-    - "https://doh.pub/dns-query"
     - "https://dns.alidns.com/dns-query"
+    - "https://doh.pub/dns-query"
 
 # TUN
 tun:
@@ -135,24 +135,6 @@ proxy-groups:
       - 香港节点
       - 台湾节点
       - 新国节点
-
-  - name: 谷歌服务
-    type: select
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png"
-    proxies:
-      - 新国节点
-      - 香港节点
-      - 美国节点
-      - 全球服务
-
-  - name: 媒体服务
-    type: select
-    icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/DisneyPlus.png"
-    proxies:
-      - 新国节点
-      - 香港节点
-      - 美国节点
-      - 全球服务
 
   - name: 微软服务
     type: select
@@ -244,16 +226,6 @@ rule-providers:
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.list"
     path: "./RuleSet/Microsoft.list"
 
-  媒体服务:
-    <<: *list
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GlobalMedia/GlobalMedia.list"
-    path: "./RuleSet/GlobalMedia.list"
-
-  谷歌服务:
-    <<: *list
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google.list"
-    path: "./RuleSet/Google.list"
-
   全球服务:
     <<: *list
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.list"
@@ -272,8 +244,6 @@ rules:
   - RULE-SET,苹果服务,苹果服务
   - RULE-SET,电报服务,电报服务
   - RULE-SET,微软服务,微软服务
-  - RULE-SET,媒体服务,媒体服务
-  - RULE-SET,谷歌服务,谷歌服务
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,直接连接
   - MATCH,漏网之鱼
