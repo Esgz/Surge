@@ -1,6 +1,6 @@
 # Mihomo 配置
 # 名称：config.yaml
-# 版本：2026-03-17
+# 版本：2026-03-20
 # 适用: Windows / Android
 
 # 端口
@@ -33,7 +33,7 @@ sniffer:
   enable: true
   force-dns-mapping: true
   parse-pure-ip: true
-  override-destination: true
+  override-destination: false
   sniff:
     HTTP:
       ports: [80, 8080-8880]
@@ -49,12 +49,7 @@ dns:
   prefer-h3: true
   listen: "0.0.0.0:1053"
   ipv6: true
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter:
-    - "*.lan"
-    - "*.local"
-    - "*.localhost"
+  enhanced-mode: redir-host
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
@@ -67,13 +62,11 @@ tun:
   enable: true
   stack: system
   auto-detect-interface: true
-  mtu: 0
   auto-route: true
   auto-redirect: true
   strict-route: true
   dns-hijack:
-    - udp://any:53
-    - tcp://any:53
+    - any:53
 
 # 订阅参数
 proxy-providers:
@@ -97,6 +90,7 @@ UrlTest: &UrlTest
   disable-udp: false
   timeout: 2000
   max-failed-times: 3
+  fallback-auto: true
   include-all-providers: true
 
 # 本地策略
