@@ -1,6 +1,6 @@
 # Mihomo 配置
 # 名称：config.yaml
-# 版本：2026-03-20
+# 版本：2026-03-25
 # 适用: Windows / Android
 
 # 端口
@@ -73,17 +73,17 @@ proxy-providers:
   Clash:
     type: http
     url: "订阅链接"
-    interval: 10800
+    interval: 3600
     health-check:
       enable: true
       url: "https://www.gstatic.com/generate_204"
-      interval: 1800
+      interval: 60
     path: "./proxy_provider/Clash.yaml"
 
 # 锚点 时延优选
 UrlTest: &UrlTest
   type: url-test
-  interval: 600
+  interval: 60
   tolerance: 50
   lazy: true
   url: "https://www.gstatic.com/generate_204"
