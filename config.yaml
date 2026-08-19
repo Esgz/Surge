@@ -1,6 +1,6 @@
 # Mihomo 配置
 # 名称：config.yaml
-# 版本：2026-08-18
+# 版本：2026-08-19
 # 适用: Windows / Android
 
 # 端口
@@ -109,6 +109,7 @@ UrlTest: &UrlTest
   disable-udp: false
   timeout: 2000
   max-failed-times: 3
+  hidden: true
 
 # 本地策略
 proxies:
@@ -119,34 +120,42 @@ proxies:
 
 # 策略组
 proxy-groups:
-  - name: 漏网之鱼
+  - name: 大陆服务
     type: select
-    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Catnet.png"
+    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/China_Map.png"
     proxies:
       - 直接连接
       - 全球服务
 
-  - name: 广告拦截
+  - name: 电报服务
     type: select
-    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Reject.png"
+    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Telegram.png"
     proxies:
-      - 拒绝连接
-      - 直接连接
-
-  - name: 游戏服务
-    type: select
-    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Steam.png"
-    proxies:
-      - 直接连接
       - 全球服务
+      - 直接连接
       - 香港-壹
       - 香港-贰
       - 台湾-壹
       - 台湾-贰
       - 日本-壹
       - 日本-贰
-      - 韩国-壹
-      - 韩国-贰
+      - 新国-壹
+      - 新国-贰
+      - 美国-壹
+      - 美国-贰
+
+  - name: 游戏服务
+    type: select
+    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Steam.png"
+    proxies:
+      - 全球服务
+      - 直接连接
+      - 香港-壹
+      - 香港-贰
+      - 台湾-壹
+      - 台湾-贰
+      - 日本-壹
+      - 日本-贰
       - 新国-壹
       - 新国-贰
       - 美国-壹
@@ -154,7 +163,7 @@ proxy-groups:
 
   - name: 苹果服务
     type: select
-    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Apple_2.png"
+    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Apple.png"
     proxies:
       - 直接连接
       - 全球服务
@@ -171,46 +180,6 @@ proxy-groups:
       - 台湾-贰
       - 日本-壹
       - 日本-贰
-      - 韩国-壹
-      - 韩国-贰
-      - 新国-壹
-      - 新国-贰
-      - 美国-壹
-      - 美国-贰
-
-  - name: 电报服务
-    type: select
-    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Telegram.png"
-    proxies:
-      - 全球服务
-      - 直接连接
-      - 香港-壹
-      - 香港-贰
-      - 台湾-壹
-      - 台湾-贰
-      - 日本-壹
-      - 日本-贰
-      - 韩国-壹
-      - 韩国-贰
-      - 新国-壹
-      - 新国-贰
-      - 美国-壹
-      - 美国-贰
-
-  - name: 智能服务
-    type: select
-    icon: "https://raw.bgithub.xyz/Esgz/icon/refs/heads/main/copilot.png"
-    proxies:
-      - 全球服务
-      - 直接连接
-      - 香港-壹
-      - 香港-贰
-      - 台湾-壹
-      - 台湾-贰
-      - 日本-壹
-      - 日本-贰
-      - 韩国-壹
-      - 韩国-贰
       - 新国-壹
       - 新国-贰
       - 美国-壹
@@ -228,8 +197,6 @@ proxy-groups:
       - 台湾-贰
       - 日本-壹
       - 日本-贰
-      - 韩国-壹
-      - 韩国-贰
       - 新国-壹
       - 新国-贰
       - 美国-壹
@@ -247,8 +214,6 @@ proxy-groups:
       - 台湾-贰
       - 日本-壹
       - 日本-贰
-      - 韩国-壹
-      - 韩国-贰
       - 新国-壹
       - 新国-贰
       - 美国-壹
@@ -264,8 +229,6 @@ proxy-groups:
       - 台湾-贰
       - 日本-壹
       - 日本-贰
-      - 韩国-壹
-      - 韩国-贰
       - 新国-壹
       - 新国-贰
       - 美国-壹
@@ -326,20 +289,6 @@ proxy-groups:
     use:
       - TWO
 
-  - name: 韩国-壹
-    <<: *UrlTest
-    filter: "🇰🇷|韩国"
-    icon: "https://raw.bgithub.xyz/Orz-3/mini/master/Color/KR.png"
-    use:
-      - ONE
-
-  - name: 韩国-贰
-    <<: *UrlTest
-    filter: "🇰🇷|韩国"
-    icon: "https://raw.bgithub.xyz/lige47/QuanX-icon-rule/main/icon/01Country/Korea.png"
-    use:
-      - TWO
-
   - name: 新国-壹
     <<: *UrlTest
     filter: "🇸🇬|新加坡"
@@ -378,40 +327,35 @@ list: &list
 
 # 远程规则
 rule-providers:
-  直连修正:
+  局域服务:
     <<: *list
-    url: "https://raw.githubusercontent.com/Esgz/Surge/main/Direct.list"
+    url: "https://raw.githubusercontent.com/Esgz/rule/main/Lan.list"
+    path: "./RuleSet/Lan.list"
+
+  直连服务:
+    <<: *list
+    url: "https://raw.githubusercontent.com/Esgz/rule/main/Direct.list"
     path: "./RuleSet/Direct.list"
 
-  代理修正:
+  代理服务:
     <<: *list
-    url: "https://raw.githubusercontent.com/Esgz/Surge/main/Proxy.list"
+    url: "https://raw.githubusercontent.com/Esgz/rule/main/Proxy.list"
     path: "./RuleSet/Proxy.list"
 
-  域名拦截:
+  拦截服务:
     <<: *list
-    url: "https://raw.githubusercontent.com/Esgz/Surge/main/Reject.list"
+    url: "https://raw.githubusercontent.com/Esgz/rule/main/Reject.list"
     path: "./RuleSet/Reject.list"
-
-  局域网络:
-    <<: *list
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.list"
-    path: "./RuleSet/Lan.list"
 
   媒体服务:
     <<: *list
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Emby/Emby.list"
-    path: "./RuleSet/Emby.list"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia.list"
+    path: "./RuleSet/GlobalMedia.list"
 
   游戏服务:
     <<: *list
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.list"
     path: "./RuleSet/Steam.list"
-
-  阿里服务:
-    <<: *list
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Alibaba/Alibaba.list"
-    path: "./RuleSet/Alibaba.list"
 
   苹果服务:
     <<: *list
@@ -420,18 +364,18 @@ rule-providers:
 
   电报服务:
     <<: *list
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.list"
+    url: "https://raw.githubusercontent.com/Moli-X/Tool/X/Clash/Rules/Telegram.list"
     path: "./RuleSet/Telegram.list"
-
-  智能服务:
-    <<: *list
-    url: "https://raw.githubusercontent.com/viewer12/OverseasAI.list/main/rule/Clash/OverseasAI/OverseasAI.list"
-    path: "./RuleSet/OverseasAI.list"
 
   谷歌服务:
     <<: *list
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.list"
     path: "./RuleSet/Google.list"
+
+  GitHub:
+    <<: *list
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.list"
+    path: "./RuleSet/GitHub.list"
 
   微软服务:
     <<: *list
@@ -440,28 +384,21 @@ rule-providers:
 
   全球服务:
     <<: *list
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global.list"
-    path: "./RuleSet/Global.list"
-
-  大陆服务:
-    <<: *list
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.list"
-    path: "./RuleSet/ChinaMax.list"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy.list"
+    path: "./RuleSet/Proxy_All.list"
 
 # 本地规则
 rules:
-  - RULE-SET,直连修正,直接连接
-  - RULE-SET,代理修正,全球服务
-  - RULE-SET,域名拦截,拒绝连接
-  - RULE-SET,局域网络,直接连接
+  - RULE-SET,局域服务,直接连接
+  - RULE-SET,直连服务,直接连接
+  - RULE-SET,代理服务,全球服务
+  - RULE-SET,拦截服务,拒绝连接
   - RULE-SET,媒体服务,媒体服务
   - RULE-SET,游戏服务,游戏服务
-  - RULE-SET,阿里服务,直接连接
   - RULE-SET,苹果服务,苹果服务
   - RULE-SET,电报服务,电报服务
-  - RULE-SET,智能服务,智能服务
   - RULE-SET,谷歌服务,谷歌服务
+  - RULE-SET,GitHub,全球服务
   - RULE-SET,微软服务,微软服务
   - RULE-SET,全球服务,全球服务
-  - RULE-SET,大陆服务,直接连接
-  - MATCH,漏网之鱼
+  - MATCH,大陆服务
