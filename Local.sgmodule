@@ -26,7 +26,7 @@ DOMAIN-SUFFIX,adkwai.com,REJECT
 #^https://app.bilibili.com/x/v2/splash/show data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 [URL Rewrite]
-# 将域名替换为镜像源
+# 将raw.git域名替换为镜像源
 ^https?://raw\.githubusercontent\.com/(.*) https://raw.bgithub.xyz/$1 header
 
 # 爱思助手
