@@ -1,0 +1,404 @@
+# Mihomo 配置
+# 名称：config.yaml
+# 版本：2026-08-20
+# 适用: Windows / Android
+
+# 端口
+port: 7890
+socks-port: 7891
+mixed-port: 7892
+redir-port: 9797
+tproxy-port: 9898
+
+# 通用
+ipv6: true
+mode: rule
+log-level: info
+allow-lan: true
+unified-delay: true
+tcp-concurrent: true
+find-process-mode: strict
+
+# 面板
+external-controller: 127.0.0.1:9090
+external-ui: webui
+external-ui-url: "https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip"
+
+# 缓存
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+# 嗅探
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    HTTP:
+      ports:
+        - 80
+        - 8080-8880
+      override-destination: true
+    TLS:
+      ports:
+        - 443
+        - 8443
+    QUIC:
+      ports:
+        - 443
+        - 8443
+
+# system/mixed/gvisor
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack:
+    - any:53
+  auto-route: true
+  auto-detect-interface: true
+  strict-route: true
+
+# redir-host/fake-ip
+dns:
+  enable: true
+  prefer-h3: true
+  listen: 0.0.0.0:1053
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - +.lan
+    - +.local
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+
+# 锚点：订阅参数
+Proxy: &Proxy
+  type: http
+  interval: 21600
+  health-check:
+    enable: true
+    url: "https://www.gstatic.com/generate_204"
+    interval: 1800
+
+# 订阅链接
+proxy-providers:
+  ONE:
+    <<: *Proxy
+    url: "订阅一"
+    path: "./proxy_provider/One.yaml"
+
+  TWO:
+    <<: *Proxy
+    url: "订阅二"
+    path: "./proxy_provider/Two.yaml"
+
+# 锚点：时延优选
+UrlTest: &UrlTest
+  type: url-test
+  interval: 1800
+  tolerance: 50
+  lazy: true
+  url: "https://www.gstatic.com/generate_204"
+  disable-udp: false
+  timeout: 2000
+  max-failed-times: 3
+  hidden: true
+
+# 本地策略
+proxies:
+  - name: 直接连接
+    type: direct
+  - name: 拒绝连接
+    type: reject
+
+# 策略组
+proxy-groups:
+  - name: 大陆服务
+    type: select
+    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/China_Map.png"
+    proxies:
+      - 直接连接
+      - 全球服务
+
+  - name: 电报服务
+    type: select
+    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Telegram.png"
+    proxies:
+      - 全球服务
+      - 直接连接
+      - 香港-壹
+      - 香港-贰
+      - 台湾-壹
+      - 台湾-贰
+      - 日本-壹
+      - 日本-贰
+      - 新国-壹
+      - 新国-贰
+      - 美国-壹
+      - 美国-贰
+
+  - name: 游戏服务
+    type: select
+    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Steam.png"
+    proxies:
+      - 全球服务
+      - 直接连接
+      - 香港-壹
+      - 香港-贰
+      - 台湾-壹
+      - 台湾-贰
+      - 日本-壹
+      - 日本-贰
+      - 新国-壹
+      - 新国-贰
+      - 美国-壹
+      - 美国-贰
+
+  - name: 苹果服务
+    type: select
+    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Apple.png"
+    proxies:
+      - 直接连接
+      - 全球服务
+
+  - name: 谷歌服务
+    type: select
+    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Google_Search.png"
+    proxies:
+      - 全球服务
+      - 直接连接
+      - 香港-壹
+      - 香港-贰
+      - 台湾-壹
+      - 台湾-贰
+      - 日本-壹
+      - 日本-贰
+      - 新国-壹
+      - 新国-贰
+      - 美国-壹
+      - 美国-贰
+
+  - name: 媒体服务
+    type: select
+    icon: "https://raw.bgithub.xyz/Orz-3/mini/master/Color/DisneyPlus.png"
+    proxies:
+      - 全球服务
+      - 直接连接
+      - 香港-壹
+      - 香港-贰
+      - 台湾-壹
+      - 台湾-贰
+      - 日本-壹
+      - 日本-贰
+      - 新国-壹
+      - 新国-贰
+      - 美国-壹
+      - 美国-贰
+
+  - name: 微软服务
+    type: select
+    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Microsoft.png"
+    proxies:
+      - 全球服务
+      - 直接连接
+      - 香港-壹
+      - 香港-贰
+      - 台湾-壹
+      - 台湾-贰
+      - 日本-壹
+      - 日本-贰
+      - 新国-壹
+      - 新国-贰
+      - 美国-壹
+      - 美国-贰
+
+  - name: 全球服务
+    type: select
+    icon: "https://raw.bgithub.xyz/Koolson/Qure/master/IconSet/Color/Global.png"
+    proxies:
+      - 香港-壹
+      - 香港-贰
+      - 台湾-壹
+      - 台湾-贰
+      - 日本-壹
+      - 日本-贰
+      - 新国-壹
+      - 新国-贰
+      - 美国-壹
+      - 美国-贰
+
+# 节点筛选
+  - name: 机场-壹
+    type: select
+    icon: "https://raw.bgithub.xyz/lige47/QuanX-icon-rule/main/icon/02ProxySoftLogo/Surge(11).png"
+    use:
+      - ONE
+
+  - name: 机场-贰
+    type: select
+    icon: "https://raw.bgithub.xyz/lige47/QuanX-icon-rule/main/icon/02ProxySoftLogo/Surge(13).png"
+    use:
+      - TWO
+
+  - name: 香港-壹
+    <<: *UrlTest
+    filter: "🇭🇰|香港"
+    icon: "https://raw.bgithub.xyz/Orz-3/mini/master/Color/HK.png"
+    use:
+      - ONE
+
+  - name: 香港-贰
+    <<: *UrlTest
+    filter: "🇭🇰|香港"
+    icon: "https://raw.bgithub.xyz/lige47/QuanX-icon-rule/main/icon/01Country/Hongkong.png"
+    use:
+      - TWO
+
+  - name: 台湾-壹
+    <<: *UrlTest
+    filter: "🇹🇼|台湾"
+    icon: "https://raw.bgithub.xyz/Orz-3/mini/master/Color/TW.png"
+    use:
+      - ONE
+
+  - name: 台湾-贰
+    <<: *UrlTest
+    filter: "🇹🇼|台湾"
+    icon: "https://raw.bgithub.xyz/lige47/QuanX-icon-rule/main/icon/01Country/taiwan(3).png"
+    use:
+      - TWO
+
+  - name: 日本-壹
+    <<: *UrlTest
+    filter: "🇯🇵|日本"
+    icon: "https://raw.bgithub.xyz/Orz-3/mini/master/Color/JP.png"
+    use:
+      - ONE
+
+  - name: 日本-贰
+    <<: *UrlTest
+    filter: "🇯🇵|日本"
+    icon: "https://raw.bgithub.xyz/lige47/QuanX-icon-rule/main/icon/01Country/Japan(3).png"
+    use:
+      - TWO
+
+  - name: 新国-壹
+    <<: *UrlTest
+    filter: "🇸🇬|新加坡"
+    icon: "https://raw.bgithub.xyz/Orz-3/mini/master/Color/SG.png"
+    use:
+      - ONE
+
+  - name: 新国-贰
+    <<: *UrlTest
+    filter: "🇸🇬|新加坡"
+    icon: "https://raw.bgithub.xyz/lige47/QuanX-icon-rule/main/icon/01Country/singapore(1).png"
+    use:
+      - TWO
+
+  - name: 美国-壹
+    <<: *UrlTest
+    filter: "🇺🇸|美国"
+    icon: "https://raw.bgithub.xyz/Orz-3/mini/master/Color/US.png"
+    use:
+      - ONE
+
+  - name: 美国-贰
+    <<: *UrlTest
+    filter: "🇺🇸|美国"
+    icon: "https://raw.bgithub.xyz/lige47/QuanX-icon-rule/main/icon/01Country/US.png"
+    use:
+      - TWO
+
+# 锚点：规则类型
+list: &list
+  type: http
+  interval: 86400
+  timeout: 5000
+  behavior: classical
+  format: text
+
+# 远程规则
+rule-providers:
+  局域服务:
+    <<: *list
+    url: "https://raw.githubusercontent.com/Esgz/rule/main/Lan.list"
+    path: "./RuleSet/Lan.list"
+
+  直连服务:
+    <<: *list
+    url: "https://raw.githubusercontent.com/Esgz/rule/main/Direct.list"
+    path: "./RuleSet/Direct.list"
+
+  代理服务:
+    <<: *list
+    url: "https://raw.githubusercontent.com/Esgz/rule/main/Proxy.list"
+    path: "./RuleSet/Proxy.list"
+
+  拦截服务:
+    <<: *list
+    url: "https://raw.githubusercontent.com/Esgz/rule/main/Reject.list"
+    path: "./RuleSet/Reject.list"
+
+  媒体服务:
+    <<: *list
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia.list"
+    path: "./RuleSet/GlobalMedia.list"
+
+  游戏服务:
+    <<: *list
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.list"
+    path: "./RuleSet/Steam.list"
+
+  苹果服务:
+    <<: *list
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.list"
+    path: "./RuleSet/Apple.list"
+
+  电报服务:
+    <<: *list
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.list"
+    path: "./RuleSet/Telegram.list"
+
+  谷歌服务:
+    <<: *list
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.list"
+    path: "./RuleSet/Google.list"
+
+  GitHub:
+    <<: *list
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.list"
+    path: "./RuleSet/GitHub.list"
+
+  微软服务:
+    <<: *list
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.list"
+    path: "./RuleSet/Microsoft.list"
+
+  全球服务:
+    <<: *list
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy.list"
+    path: "./RuleSet/Proxy_All.list"
+
+# 本地规则
+rules:
+  - RULE-SET,局域服务,直接连接
+  - RULE-SET,直连服务,直接连接
+  - RULE-SET,代理服务,全球服务
+  - RULE-SET,拦截服务,拒绝连接
+  - RULE-SET,媒体服务,媒体服务
+  - RULE-SET,游戏服务,游戏服务
+  - RULE-SET,苹果服务,苹果服务
+  - RULE-SET,电报服务,电报服务
+  - RULE-SET,谷歌服务,谷歌服务
+  - RULE-SET,GitHub,全球服务
+  - RULE-SET,微软服务,微软服务
+  - RULE-SET,全球服务,全球服务
+  - MATCH,大陆服务
