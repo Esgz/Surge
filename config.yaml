@@ -325,11 +325,16 @@ list: &list
   behavior: classical
   format: text
 
+file: &file
+  type: file
+  behavior: classical
+  format: text
+
 # 远程规则
 rule-providers:
   局域服务:
     <<: *list
-    url: "https://raw.githubusercontent.com/Esgz/rule/main/Lan.list"
+    url: "https://raw.githubusercontent.com/Moli-X/Tool/X/Clash/Rules/Lan.list"
     path: "./RuleSet/Lan.list"
 
   直连服务:
@@ -347,10 +352,8 @@ rule-providers:
     url: "https://raw.githubusercontent.com/Esgz/rule/main/Reject.list"
     path: "./RuleSet/Reject.list"
 
-  影视服务:
-    type: file
-    behavior: classical
-    format: text
+  影视追番:
+    <<: *file
     path: "./RuleSet/Emby.list"
 
   媒体服务:
@@ -399,7 +402,7 @@ rules:
   - RULE-SET,直连服务,直接连接
   - RULE-SET,代理服务,全球服务
   - RULE-SET,拦截服务,拒绝连接
-  - RULE-SET,影视服务,媒体服务
+  - RULE-SET,影视追番,媒体服务
   - RULE-SET,媒体服务,媒体服务
   - RULE-SET,游戏服务,游戏服务
   - RULE-SET,苹果服务,苹果服务
