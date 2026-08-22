@@ -1,6 +1,6 @@
 # Mihomo 配置
 # 名称：config.yaml
-# 版本：2026-08-21
+# 版本：2026-08-22
 # 适用: Windows / Android
 
 # 端口
@@ -75,8 +75,8 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
   nameserver:
-    - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
 
 # 锚点：订阅参数
 Proxy: &Proxy
@@ -356,7 +356,7 @@ rule-providers:
     <<: *file
     path: "./RuleSet/Emby.list"
 
-  媒体服务:
+  海外媒体:
     <<: *list
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia.list"
     path: "./RuleSet/GlobalMedia.list"
@@ -403,7 +403,7 @@ rules:
   - RULE-SET,代理服务,全球服务
   - RULE-SET,拦截服务,拒绝连接
   - RULE-SET,影视追番,媒体服务
-  - RULE-SET,媒体服务,媒体服务
+  - RULE-SET,海外媒体,媒体服务
   - RULE-SET,游戏服务,游戏服务
   - RULE-SET,苹果服务,苹果服务
   - RULE-SET,电报服务,电报服务
