@@ -1,6 +1,6 @@
 # Mihomo 配置
 # 名称：config.yaml
-# 版本：2026-08-25
+# 版本：2026-08-27
 # 适用: Windows / Android
 
 # 端口
@@ -55,21 +55,20 @@ tun:
   enable: true
   stack: mixed
   dns-hijack:
-    - any:53
+    - "any:53"
+    - "tcp://any:53"
   auto-route: true
   auto-detect-interface: true
 
 # redir-host/fake-ip
 dns:
   enable: true
-  prefer-h3: false
-  listen: 0.0.0.0:1053
   ipv6: true
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-    - +.lan
-    - +.local
+    - "*"
+    - "+.lan"
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
