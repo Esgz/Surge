@@ -56,7 +56,7 @@ tun:
 dns:
   enable: true
   ipv6: true
-  listen: 127.0.0.1:53
+  listen: 127.0.0.1:1053
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
@@ -76,7 +76,7 @@ Proxy: &Proxy
   health-check:
     enable: true
     url: "https://www.gstatic.com/generate_204"
-    interval: 1800
+    interval: 3600
 
 # 订阅
 proxy-providers:
@@ -93,7 +93,7 @@ UrlTest: &UrlTest
   lazy: true
   url: "https://www.gstatic.com/generate_204"
   disable-udp: false
-  timeout: 2000
+  timeout: 3000
   max-failed-times: 3
   hidden: true
 
@@ -106,26 +106,26 @@ proxies:
 
 # 策略组
 proxy-groups:
-  - name: 规则修正
+  - name: 黑白名单
     type: select
     icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png"
     proxies:
-      - 直接连接
       - 香港节点
       - 台湾节点
       - 日本节点
       - 新国节点
       - 美国节点
+      - 直接连接
 
-  - name: 全球服务
+  - name: 规则修正
     type: select
     icon: "https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png"
     proxies:
-      - 香港节点
-      - 台湾节点
-      - 日本节点
-      - 新国节点
       - 美国节点
+      - 新国节点
+      - 日本节点
+      - 台湾节点
+      - 香港节点
       - 直接连接
 
   - name: 香港节点
@@ -164,33 +164,41 @@ proxy-groups:
       - Clash
 
 # 规则锚点
-list: &list
+class: &class
   type: http
   interval: 86400
   timeout: 5000
+  behavior: classical
+  format: yaml
+
+file: &file
+  type: file
   behavior: classical
   format: text
 
 # 规则集
 rule-providers:
   域名拦截:
-    <<: *list
-    url: "https://raw.githubusercontent.com/Esgz/rules/main/Reject.list"
+    <<: *file
     path: "./RuleSet/Reject.list"
 
-  规则修正:
-    <<: *list
-    url: "https://raw.githubusercontent.com/Esgz/rules/main/Direct.list"
+  代理修正:
+    <<: *file
+    path: "./RuleSet/Proxy.list"
+
+  直连修正:
+    <<: *file
     path: "./RuleSet/Direct.list"
 
   大陆服务:
-    <<: *list
-    url: "https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Ruleset/Surge/ChinaASN.list"
-    path: "./RuleSet/ChinaASN.list"
+    <<: *class
+    url: "https://rule.kelee.one/Clash/ChinaMax.yaml"
+    path: "./RuleSet/ChinaMax.yaml"
 
 # 规则
 rules:
   - RULE-SET,域名拦截,拒绝连接
-  - RULE-SET,规则修正,规则修正
+  - RULE-SET,代理修正,规则修正
+  - RULE-SET,直连修正,直接连接
   - RULE-SET,大陆服务,直接连接
-  - MATCH,全球服务
+  - MATCH,黑白名单
